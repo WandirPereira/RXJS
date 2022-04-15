@@ -18,17 +18,17 @@ const intervalos$ = new Observable<number>(subscriber => {
         1000
     );
 
-    // setTimeout(
-    //     () => {
-    //             subscriber.complete();
-    //     },
-    //     2500
-    // );
+    setTimeout(
+        () => {
+                subscriber.complete();
+        },
+        2500
+    );
     
-    // return () => {
-    //     clearInterval(interval);
-    //     console.log('Intervalo destruido');
-    // }
+    return () => {
+        clearInterval(interval);
+        console.log('Intervalo destruido');
+    }
 
 });
 
@@ -41,14 +41,14 @@ const intervalos$ = new Observable<number>(subscriber => {
     const subscription3 = intervalos$.subscribe( observer);
 
     
-    subscription1.add( subscription2 );
-    subscription2.add( subscription3 );
+    //subscription1.add( subscription2 );
+    //subscription2.add( subscription3 );
 
     setTimeout(
         () => {
             subscription1.unsubscribe();
-            // subscription2.unsubscribe();
-            // subscription3.unsubscribe();
+            subscription2.unsubscribe();
+            subscription3.unsubscribe();
             console.log('Completado Timeout');
         },
         6000
